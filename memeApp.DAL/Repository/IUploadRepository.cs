@@ -11,6 +11,7 @@ namespace memeApp.DAL.Repository
     {
         public Task<List<MemeTemplateUpload>> RemoveAllMemes();
         public Task<int> GetMemeCount();    
+        public Task<MemeTemplateUpload> GetMemeByName(string name); 
         public Task<List<MemeTemplateUpload>> GetPagedData(PaginationFilters paginationFilters);
 
     }

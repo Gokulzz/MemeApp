@@ -35,5 +35,10 @@ namespace memeApp.DAL.Implementations
                 .ToListAsync();
             return pagedData;
         }
+        public async Task<MemeTemplateUpload> GetMemeByName(string name)
+        { 
+            var meme_Name= await dataContext.UploadMeme.Where(x=>x.Name.ToLower().Equals(name.Trim().ToLower())).FirstOrDefaultAsync();
+            return meme_Name;
+        }
     }
 }

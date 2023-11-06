@@ -14,6 +14,7 @@ namespace memeApp.BLL.Services
         public Task<ApiResponse> GetMeme(Guid id);
         public Task<PagedResponse> GetPagedData(PaginationFiltersDTO paginationFilters);
         public Task<ApiResponse> GetMeme();
+        public Task<ApiResponse> GetMemeByName(string name);
         public Task<IActionResult> AddMeme(UploadDTO upload);
         public Task<ApiResponse> DeleteMeme(Guid id);
         public Task<ApiResponse> DeleteAllMemes();

@@ -19,6 +19,7 @@ using Microsoft.Extensions.Caching.Distributed;
 using System.Text.Json.Serialization;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Logging;
+using Microsoft.EntityFrameworkCore.Query.Internal;
 
 namespace memeApp.BLL.Implementations
 {
@@ -90,6 +91,30 @@ namespace memeApp.BLL.Implementations
             return new ApiResponse(200, "Meme Displayed successfully", memes);
 
 
+        }
+        public async Task<ApiResponse> GetMemeByName(string name)
+        {
+            if(name== null)
+            {
+                throw new ArgumentNullException("name");
+            }
+            try
+            {
+                var getMemeByName = await unitofWork.uploadRepository.GetMemeByName(name);
+                if(getMemeByName == null)
+                {
+                    throw new NotFoundException($"Meme of  this name could not be found");
+                }
+                return new ApiResponse(200, $"Meme of name= {name} displayed successfully", getMemeByName);
+
+            }   
+            catch(Exception ex)
+            {
+              throw new Exception(ex.Message, ex);
+            }
+            
+                 
+            
         }
     
 

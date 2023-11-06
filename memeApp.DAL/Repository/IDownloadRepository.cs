@@ -9,7 +9,7 @@ namespace memeApp.DAL.Repository
 {
     public interface IDownloadRepository : IGenericRepository<MemeTemplateDownload>
     {
-       
+     
      
     }
 }

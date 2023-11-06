@@ -1,4 +1,5 @@
-﻿using memeApp.BLL;
+﻿using System.Reflection.Metadata.Ecma335;
+using memeApp.BLL;
 using memeApp.BLL.DTO;
 using memeApp.BLL.Services;
 using Microsoft.AspNetCore.Authorization;
@@ -27,6 +28,12 @@ namespace memeApp.PL.Controllers
         {
             var get_Memes = await uploadservice.GetMeme();
             return get_Memes;
+        }
+        [HttpGet("GetMemeByName")]
+        public async Task<ApiResponse> GetMemeByName(string name)
+        {
+            var get_Meme = await uploadservice.GetMemeByName(name);
+            return get_Meme;
         }
 
         [HttpGet("GetPagedMeme")]
