@@ -142,7 +142,7 @@ namespace memeApp.BLL.Implementations
         public  Guid GetCurrentId()
         {
             //we are using httpcontext accessor as we are trying to access the http context inside  the service
-            //we are getting the id of the authenticated user from the
+            //we are getting the id of the authenticated user from the JWT token.
             var claimIdentity =contextAccessor.HttpContext.User.Identity as ClaimsIdentity;
             if(claimIdentity!=null)
             {

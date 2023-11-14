@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace memeApp.PL.Controllers
 {
-    //[Authorize(Roles = "Admin, Normal User")]
+    [Authorize(Roles = "Admin, Normal User")]
     public class UploadController : Controller
     {
        

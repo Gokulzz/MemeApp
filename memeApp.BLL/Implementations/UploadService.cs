@@ -30,15 +30,16 @@ namespace memeApp.BLL.Implementations
         private readonly ILogger<MemeTemplateUpload> logger;
         private readonly IMapper mapper;
         private readonly IDistributedCache cache;
+        private readonly IUserService userService;
         private const string cacheKey = "Memes";
-        public UploadService(IUnitofWork unitofWork, IWebHostEnvironment webHost, IMapper mapper, IDistributedCache cache, ILogger<MemeTemplateUpload> logger)
+        public UploadService(IUnitofWork unitofWork, IWebHostEnvironment webHost, IMapper mapper, IDistributedCache cache, ILogger<MemeTemplateUpload> logger, IUserService userService)
         {
             this.unitofWork = unitofWork;
             this.webHost = webHost;
             this.mapper = mapper;
             this.cache = cache;
             this.logger = logger;
-
+            this.userService = userService; 
         }
         public async Task<ApiResponse> GetMeme(Guid Id)
         {
@@ -124,6 +125,7 @@ namespace memeApp.BLL.Implementations
         {
             try
             {
+                Guid userId= userService.GetCurrentId();
                 var path = webHost.WebRootPath;
                 var filePath = "Content/Files/" + upload.fileData.FileName;
                 var fullPath = Path.Combine(path, filePath);
@@ -137,7 +139,7 @@ namespace memeApp.BLL.Implementations
                     Keyword = upload.Keyword,
                     UploadDate = DateTime.Now,
                     Path = filePath,
-                    usersId = upload.UserId,
+                    usersId = userId,
                     //fileData = await ReadFile(upload.fileData)
 
                     //await unitofWork.userRepository.FindUserByName(upload.UserName)
